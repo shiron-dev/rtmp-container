@@ -29,6 +29,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Set outputs
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      - name: Check outputs
+        run: echo ${{ steps.vars.outputs.sha_short }}
       - uses: docker/login-action@v2
         with:
           registry: ghcr.io
@@ -41,7 +46,7 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository_owner }}/rtmp-server:latest
-            ghcr.io/${{ github.repository_owner }}/rtmp-server:$(echo $GITHUB_SHA | head -c7)
+            ghcr.io/${{ github.repository_owner }}/rtmp-server:${{ steps.vars.outputs.sha_short  }}
       - name: Build and push (sender)
         uses: docker/build-push-action@v4
         with:
@@ -49,4 +54,4 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository_owner }}/rtmp-sender:latest
-            ghcr.io/${{ github.repository_owner }}/rtmp-sender:$(echo $GITHUB_SHA | head -c7)
+            ghcr.io/${{ github.repository_owner }}/rtmp-sender:${{ steps.vars.outputs.sha_short  }}
