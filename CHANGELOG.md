@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/shiron4710/rtmp-container/compare/v1.0.1...v1.0.2) (2023-06-18)
+
+
+### Bug Fixes
+
+* release action ([00e199e](https://github.com/shiron4710/rtmp-container/commit/00e199ec646dae2c45f991191bb6b3b42f99bea7))
+
 ## [1.0.1](https://github.com/shiron4710/rtmp-container/compare/v1.0.0...v1.0.1) (2023-06-18)
 
 
