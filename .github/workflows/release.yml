@@ -34,21 +34,19 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: docker image server
-        run: |
-          cd server
-          docker build --tag ghcr.io/$GITHUB_ACTOR/rtmp-server:latest --tag ghcr.io/$GITHUB_ACTOR/rtmp-server:$(echo $GITHUB_SHA | head -c7) .
-      - name: docker push server
-        run: |
-          cd server
-          docker push ghcr.io/$GITHUB_ACTOR/rtmp-server:latest
-          docker push ghcr.io/$GITHUB_ACTOR/rtmp-server:$(echo $GITHUB_SHA | head -c7)
-      - name: docker image sender
-        run: |
-          cd sender
-          docker build --tag ghcr.io/$GITHUB_ACTOR/rtmp-sender:latest --tag ghcr.io/$GITHUB_ACTOR/rtmp-sender:$(echo $GITHUB_SHA | head -c7) .
-      - name: docker push semder
-        run: |
-          cd sender
-          docker push ghcr.io/$GITHUB_ACTOR/rtmp-sender:latest
-          docker push ghcr.io/$GITHUB_ACTOR/rtmp-sender:$(echo $GITHUB_SHA | head -c7)
+      - name: Build and push (server)
+        uses: docker/build-push-action@v2
+        with:
+          context: server
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/rtmp-server:latest
+            ghcr.io/${{ github.repository_owner }}/rtmp-server:$(echo $GITHUB_SHA | head -c7)
+      - name: Build and push (sender)
+        uses: docker/build-push-action@v2
+        with:
+          context: server
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/rtmp-sender:latest
+            ghcr.io/${{ github.repository_owner }}/rtmp-sender:$(echo $GITHUB_SHA | head -c7)
