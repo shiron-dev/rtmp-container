@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1](https://github.com/shiron4710/rtmp-container/compare/v1.1.0...v1.1.1) (2023-06-28)
+
+
+### Bug Fixes
+
+* context ([a627fd3](https://github.com/shiron4710/rtmp-container/commit/a627fd3cf23a5d0d98d5c617b07ce9cc2afa6e88))
+
 ## [1.1.0](https://github.com/shiron4710/rtmp-container/compare/v1.0.3...v1.1.0) (2023-06-28)
 
 
