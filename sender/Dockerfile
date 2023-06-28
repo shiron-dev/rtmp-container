@@ -1,5 +1,7 @@
 FROM python:3
 
+ENV TARGET_SERVER="host.docker.internal:1935"
+
 RUN apt-get update
 RUN apt-get install ffmpeg -y
 RUN pip install --upgrade pip

@@ -2,6 +2,7 @@ import cv2
 import ffmpeg
 from datetime import datetime
 import numpy as np
+import os
 
 def main():
     width, height = 1920, 1080
@@ -10,7 +11,7 @@ def main():
 
     ffmpeg_process = (
         ffmpeg.input('pipe:', format='rawvideo', pix_fmt='bgr24', s='{}x{}'.format(width, height))
-        .output('rtmp://host.docker.internal:1935/live/live', vcodec='libx264', pix_fmt='yuv420p', format='flv')
+        .output(f"rtmp://{os.environ['TARGET_SERVER']}/live/live", vcodec='libx264', pix_fmt='yuv420p', format='flv')
         .overwrite_output()
         .run_async(pipe_stdin=True)
     )
